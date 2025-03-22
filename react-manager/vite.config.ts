@@ -8,9 +8,6 @@ import path from 'path';
 // 确保安装了 @types/json-schema 类型定义文件以避免类型错误
 // npm install @types/json-schema --save-dev
 
-
-
-
 export default defineConfig({
 	//服务器配置
 	server: {
@@ -23,7 +20,7 @@ export default defineConfig({
 	//别名路径配置
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, '/src'),
+			'@': path.resolve(__dirname, 'src'), // 修改为相对路径
 		},
 	},
 	plugins: [react()],
