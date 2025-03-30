@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import axios, { AxiosError } from 'axios';
-
+import { showLoading, hideLoading } from './loading';
 const instance = axios.create({
 	baseURL: '/api',
 	timeout: 8000,
@@ -10,6 +10,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(config => {
 	const token = localStorage.getItem('token');
+	showLoading();
 	if (token) {
 		config.headers.Authorization = 'Token::' + token;
 	}
@@ -18,11 +19,12 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(
 	res => {
+		hideLoading();
 		const data = res.data;
 		if (data.code === 500001) {
 			message.error(data.msg);
 			localStorage.removeItem('token');
-			location.href = '/login';
+			// location.href = '/login';
 		} else if (data.code != 0) {
 			// 这里使用Promise.reject(data)会触发后续的catch处理
 			return Promise.reject(data);
@@ -37,15 +39,16 @@ instance.interceptors.response.use(
 );
 
 export default {
-	get(url: string, params: any) {
-		return instance.get(url, { params }).catch(error => {
-			// 这里可以捕获到上面reject的错误
-			console.error('捕获到错误：', error);
-			throw error; // 继续向外抛出错误
-		});
+	get<T>(url: string, params: object): Promise<T> {
+		return instance.get(url, { params });
+		// .catch(error => {
+		// // 这里可以捕获到上面reject的错误
+		// console.error('捕获到错误：', error);
+		// throw error; // 继续向外抛出错误
+		// });
 	},
 
-	post(url: string, params: any) {
-		instance.post(url, params);
+	post<T>(url: string, params: object): Promise<T> {
+		return instance.post(url, params);
 	},
 };
