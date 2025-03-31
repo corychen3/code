@@ -2,13 +2,13 @@ import { message } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { showLoading, hideLoading } from './loading';
 import storage from '@/utils/storage';
+const ENV = import.meta.env;
 const instance = axios.create({
-	baseURL: '/api',
+	baseURL: ENV.BASE_URL,
 	timeout: 8000,
 	timeoutErrorMessage: '请求超时',
 	withCredentials: true,
 });
-const ENV = import.meta.env;
 instance.interceptors.request.use(config => {
 	const token = storage.get({ key: 'token' });
 	showLoading();
