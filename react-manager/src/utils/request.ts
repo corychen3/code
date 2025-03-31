@@ -2,9 +2,11 @@ import { message } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { showLoading, hideLoading } from './loading';
 import storage from '@/utils/storage';
-const ENV = import.meta.env;
+import env from '@/config';
+// const ENV = import.meta.env;
+console.log('src/utils/request.ts:7--', env);
 const instance = axios.create({
-	baseURL: ENV.BASE_URL,
+	baseURL: env.baseApi,
 	timeout: 8000,
 	timeoutErrorMessage: '请求超时',
 	withCredentials: true,
@@ -15,10 +17,10 @@ instance.interceptors.request.use(config => {
 	if (token) {
 		config.headers.Authorization = 'Token::' + token;
 	}
-	if (ENV.VITE_MOCK === 'true') {
-		config.baseURL = ENV.VITE_MOCK_API;
+	if (env.mock) {
+		config.baseURL = env.mockApi;
 	} else {
-		config.baseURL = ENV.BASE_URL;
+		config.baseURL = env.baseApi;
 	}
 	return { ...config };
 });
