@@ -1,18 +1,24 @@
 import { message } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { showLoading, hideLoading } from './loading';
+import storage from '@/utils/storage';
 const instance = axios.create({
 	baseURL: '/api',
 	timeout: 8000,
 	timeoutErrorMessage: '请求超时',
 	withCredentials: true,
 });
-
+const ENV = import.meta.env;
 instance.interceptors.request.use(config => {
-	const token = localStorage.getItem('token');
+	const token = storage.get({ key: 'token' });
 	showLoading();
 	if (token) {
 		config.headers.Authorization = 'Token::' + token;
+	}
+	if (ENV.VITE_MOCK === 'true') {
+		config.baseURL = ENV.VITE_MOCK_API;
+	} else {
+		config.baseURL = ENV.BASE_URL;
 	}
 	return { ...config };
 });
@@ -23,7 +29,7 @@ instance.interceptors.response.use(
 		const data = res.data;
 		if (data.code === 500001) {
 			message.error(data.msg);
-			localStorage.removeItem('token');
+			storage.remove({ key: 'token' });
 			// location.href = '/login';
 		} else if (data.code != 0) {
 			// 这里使用Promise.reject(data)会触发后续的catch处理
