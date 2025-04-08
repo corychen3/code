@@ -1,7 +1,7 @@
 /*
  * @Author: Finch
  * @Date: 2025-03-20 15:16:06
- * @LastEditTime: 2025-03-30 22:29:56
+ * @LastEditTime: 2025-04-08 18:49:34
  * @LastEditors: Finch
  * @Description:
  * @FilePath: \code\react-manager\src\router\index.tsx
@@ -12,10 +12,15 @@ import About from '@/views/About';
 import NotFound from '@/views/NotFound';
 import Home from '@/views/Home';
 import Welcome from '@/views/Welcome';
+import Login from '@/views/login';
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <Home />,
+	},
+	{
+		path: '/login',
+		element: <Login />,
 	},
 	{
 		path: '/about',
