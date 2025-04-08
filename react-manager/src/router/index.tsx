@@ -8,10 +8,10 @@
  * 可以输入预定的版权声明、个性签名、空行等
  */
 import { createBrowserRouter } from 'react-router-dom';
-import About from '@/views/About';
-import NotFound from '@/views/NotFound';
-import Home from '@/views/Home';
-import Welcome from '@/views/Welcome';
+import About from '@/views/about';
+import NotFound from '@/views/notFound';
+import Home from '@/views/home';
+import Welcome from '@/views/welcome';
 import Login from '@/views/login';
 const router = createBrowserRouter([
 	{
