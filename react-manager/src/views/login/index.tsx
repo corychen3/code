@@ -1,7 +1,7 @@
 /*
  * @Author: Finch
  * @Date: 2025-04-08 18:41:49
- * @LastEditTime: 2025-04-08 19:26:46
+ * @LastEditTime: 2025-04-08 19:50:05
  * @LastEditors: Finch
  * @Description:
  * @FilePath: \code\react-manager\src\views\login\index.tsx
@@ -9,7 +9,7 @@
  */
 import React from 'react';
 import { Button, Input, Form } from 'antd';
-import './index.less';
+import styles from './index.module.less';
 type FieldType = {
 	username?: string;
 	password?: string;
@@ -19,9 +19,9 @@ const Login: React.FC = () => {
 		console.log('src/views/login/index.tsx:5--', 'work');
 	};
 	return (
-		<div className='login-container'>
-			<div className='login-form'>
-				<div className='title'>请登录</div>
+		<div className={styles.loginContainer}>
+			<div className={styles.loginForm}>
+				<div className={styles.title}>请登录</div>
 				<Form
 					name='basic'
 					wrapperCol={{ span: 24 }}
