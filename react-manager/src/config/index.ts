@@ -1,7 +1,7 @@
 /*
  * @Author: Finch
  * @Date: 2025-03-31 09:44:57
- * @LastEditTime: 2025-03-31 10:28:02
+ * @LastEditTime: 2025-04-08 21:45:13
  * @LastEditors: Finch
  * @Description:
  * @FilePath: \code\react-manager\src\config\index.ts
@@ -24,9 +24,9 @@ const config = {
 	},
 	development: {
 		baseApi: '/api',
-		loadupApi: 'http://api-driver-dev.marsview.cc',
-		mock: true,
-		mockApi: 'http://127.0.0.1:4523/m1/5989184-5677599-default/users/login',
+		loadupApi: '',
+		mock: false, // 关闭 mock
+		mockApi: '',
 	},
 };
 export default { ...config[env] };

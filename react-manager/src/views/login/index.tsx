@@ -1,22 +1,16 @@
-/*
- * @Author: Finch
- * @Date: 2025-04-08 18:41:49
- * @LastEditTime: 2025-04-08 19:50:05
- * @LastEditors: Finch
- * @Description:
- * @FilePath: \code\react-manager\src\views\login\index.tsx
- * 可以输入预定的版权声明、个性签名、空行等
- */
 import React from 'react';
 import { Button, Input, Form } from 'antd';
+import api from '@/api';
+import { Login as loginType } from '@/types/api';
 import styles from './index.module.less';
 type FieldType = {
-	username?: string;
-	password?: string;
+	userName?: string;
+	userPwd?: string;
 };
 const Login: React.FC = () => {
-	const onFinish = () => {
-		console.log('src/views/login/index.tsx:5--', 'work');
+	const onFinish = async (values: loginType.params) => {
+		const login = await api.loginApi(values);
+		console.log('src/views/login/index.tsx:5--', login);
 	};
 	return (
 		<div className={styles.loginContainer}>
@@ -30,11 +24,11 @@ const Login: React.FC = () => {
 					onFinish={onFinish}
 					autoComplete='off'
 				>
-					<Form.Item<FieldType> name='username' rules={[{ required: true, message: 'Please input your username!' }]}>
+					<Form.Item<FieldType> name='userName' rules={[{ required: true, message: 'Please input your username!' }]}>
 						<Input />
 					</Form.Item>
 
-					<Form.Item<FieldType> name='password' rules={[{ required: true, message: 'Please input your password!' }]}>
+					<Form.Item<FieldType> name='userPwd' rules={[{ required: true, message: 'Please input your password!' }]}>
 						<Input.Password />
 					</Form.Item>
 

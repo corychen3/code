@@ -1,3 +1,12 @@
+/*
+ * @Author: Finch
+ * @Date: 2025-03-31 09:09:15
+ * @LastEditTime: 2025-04-08 21:42:13
+ * @LastEditors: Finch
+ * @Description:
+ * @FilePath: \code\react-manager\src\utils\request.ts
+ * 可以输入预定的版权声明、个性签名、空行等
+ */
 import { message } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { showLoading, hideLoading } from './loading';
@@ -6,7 +15,7 @@ import env from '@/config';
 // const ENV = import.meta.env;
 console.log('src/utils/request.ts:7--', env);
 const instance = axios.create({
-	baseURL: env.baseApi,
+	baseURL: '/api', // 修改为统一的api前缀
 	timeout: 8000,
 	timeoutErrorMessage: '请求超时',
 	withCredentials: true,
@@ -29,14 +38,13 @@ instance.interceptors.response.use(
 	res => {
 		hideLoading();
 		const data = res.data;
-		if (data.code === 500001) {
-			message.error(data.msg);
-			storage.remove({ key: 'token' });
-			// location.href = '/login';
-		} else if (data.code != 0) {
-			// 这里使用Promise.reject(data)会触发后续的catch处理
-			return Promise.reject(data);
-		}
+		//由于接口MOCK问题，暂时修改一下
+		// if (data.code === 500001) {
+		// 	message.error(data.msg);
+		// 	storage.remove({ key: 'token' });
+		// } else if (data.code != 0) {
+		// 	return Promise.reject(data);
+		// }
 		return data.data;
 	},
 	(error: AxiosError) => {
