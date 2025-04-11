@@ -7,29 +7,35 @@
  * @FilePath: \code\react-manager\src\router\index.tsx
  * 可以输入预定的版权声明、个性签名、空行等
  */
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import About from '@/views/about';
 import NotFound from '@/views/notFound';
-import Home from '@/views/home';
 import Welcome from '@/views/welcome';
 import Login from '@/views/login';
+import Layout from '@/layout';
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Home />,
+		element: <Navigate to='/welcome' />,
 	},
 	{
 		path: '/login',
 		element: <Login />,
 	},
 	{
+		element: <Layout />,
+		children: [
+			{
+				path: '/welcome',
+				element: <Welcome />,
+			},
+		],
+	},
+	{
 		path: '/about',
 		element: <About />,
 	},
-	{
-		path: '/welcome',
-		element: <Welcome />,
-	},
+
 	{
 		path: '*',
 		element: <NotFound />,

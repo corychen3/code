@@ -13,7 +13,7 @@ import { showLoading, hideLoading } from './loading';
 import storage from '@/utils/storage';
 import env from '@/config';
 // const ENV = import.meta.env;
-console.log('src/utils/request.ts:7--', env);
+// console.log('src/utils/request.ts:7--', env);
 const instance = axios.create({
 	baseURL: '/api', // 修改为统一的api前缀
 	timeout: 8000,

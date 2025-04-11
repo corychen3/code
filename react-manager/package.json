@@ -11,6 +11,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@ant-design/icons": "^6.0.0",
 		"axios": "^1.8.4",
 		"less": "^4.2.2",
 		"less-loader": "^12.2.0",

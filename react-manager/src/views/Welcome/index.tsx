@@ -1,14 +1,8 @@
 import React, { useEffect } from 'react';
-import request from '@/utils/request';
 import { Button } from 'antd';
 import storage from '@/utils/storage';
 const Welcome: React.FC = () => {
-	useEffect(() => {
-		request.post('/api', {}).then(res => {
-			let token = res;
-			console.log('src/views/Welcome/index.tsx:7--', token);
-		});
-	});
+	useEffect(() => {});
 	const handle = (type: number) => {
 		if (type === 1) {
 			storage.set({ key: 'Finch', value: { name: 'CHENJIAMING' } });
@@ -21,7 +15,7 @@ const Welcome: React.FC = () => {
 		}
 	};
 	return (
-		<div>
+		<div style={{ backgroundColor: '#fff' }}>
 			<h1>Welcome to React Manager</h1>
 			<p>This is the Welcome page of your application.</p>
 			<Button onClick={() => handle(1)}>SET</Button>

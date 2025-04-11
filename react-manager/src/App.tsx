@@ -10,20 +10,22 @@
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
 import router from './router';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, Watermark } from 'antd';
 import './App.less';
 const App: React.FC = () => {
 	return (
 		<div>
-			<ConfigProvider
-				theme={{
-					token: {
-						colorPrimary: '#cb7250',
-					},
-				}}
-			>
-				<RouterProvider router={router} />
-			</ConfigProvider>
+			<Watermark content='Finch'>
+				<ConfigProvider
+					theme={{
+						token: {
+							colorPrimary: '#cb7250',
+						},
+					}}
+				>
+					<RouterProvider router={router} />
+				</ConfigProvider>
+			</Watermark>
 		</div>
 	);
 };
